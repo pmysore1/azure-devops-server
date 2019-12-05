@@ -153,7 +153,7 @@
                           "allowGatewayTransit": "false",
                           "useRemoteGateways": "false",
                           "remoteVirtualNetwork": {
-                              "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('devOpsVnetName'))]"
+                              "id": "[resourceId('COLAB-USV1-PRD-DEF-DEVOPS-RG', Microsoft.Network/virtualNetworks', parameters('devOpsVnetName'))]"
 
                         
                           }
