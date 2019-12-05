@@ -8,8 +8,8 @@ param(
 $ErrorActionPreference = 'Stop'
 
 # TFS 2017 Update 2
-$TfsDownloadUrl = 'https://go.microsoft.com/fwlink/?LinkId=850949'
-$InstallDirectory = 'C:\Program Files\Microsoft Team Foundation Server 15.0'
+$TfsDownloadUrl = 'https://go.microsoft.com/fwlink/?LinkId=2089023'
+$InstallDirectory = 'C:\Program Files\Azure DevOps Server 2019'
 $InstallKey = 'HKLM:\SOFTWARE\Microsoft\DevDiv\tfs\Servicing\15.0\serverCore'
 
 $PsToolsDownloadUrl = 'https://download.sysinternals.com/files/PSTools.zip'
@@ -102,4 +102,4 @@ function Configure-TfsRemoteSql()
 
 Ensure-TfsInstalled
 Download-PsTools
-Configure-TfsRemoteSql
+#Configure-TfsRemoteSql
