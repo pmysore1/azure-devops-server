@@ -154,7 +154,7 @@
                           "allowGatewayTransit": "false",
                           "useRemoteGateways": "false",
                           "remoteVirtualNetwork": {
-                              "id": "[resourceId(variables('rgName'), Microsoft.Network/virtualNetworks', parameters('devOpsVnetName'))]"
+                              "id": "[resourceId(variables('rgName'), 'Microsoft.Network/virtualNetworks', parameters('devOpsVnetName'))]"
 
                         
                           }
