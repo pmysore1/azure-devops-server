@@ -175,7 +175,7 @@
             "value": "[parameters('domainName')]"
           },
           "existingVnetName": {
-            "value": "[variables('devOpsVnetName')]"
+            "value": "[parameters('devOpsVnetName')]"
           },
           "existingSubnetName": {
             "value": "[variables('subnetName')]"
@@ -229,7 +229,7 @@
             "value": "[parameters('domainName')]"
           },
           "existingVnetName": {
-            "value": "[variables('devOpsVnetName')]"
+            "value": "[parameters('devOpsVnetName')]"
           },
           "existingSubnetName": {
             "value": "[variables('subnetName')]"

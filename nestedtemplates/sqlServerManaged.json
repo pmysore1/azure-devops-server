@@ -43,6 +43,30 @@
         "description": "The password of the admin user of the SQL Server"
       }
     },
+    "existingLoadBalancerName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Load Balancer"
+      }
+    },
+    "existingLoadBalancerBackendName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Load Balancer backend"
+      }
+    },
+    "_artifactsLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+      }
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
+      }
+    },
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
