@@ -75,7 +75,8 @@
     "frontEndIPConfigID": "[concat(variables('loadBalancerID'),'/frontendIPConfigurations/', variables('lbFrontEndName'))]",
     "remoteVNet": "[resourceId(parameters('managementResourceGroupName'), 'Microsoft.Network/virtualNetworks', parameters('managementVnetName'))]",
     "peeringName": "[concat(parameters('devOpsVnetName'), '-peering-to-mgmt-vnet')]",
-    "mgmtPeeringName": "[concat(parameters('managementVnetName'), '/peering-to-devops-vnet')]"
+    "mgmtPeeringName": "[concat(parameters('managementVnetName'), '/peering-to-devops-vnet')]",
+    "rgName": "COLAB-USV1-PRD-DEF-DEVOPS-RG"
   },
   "resources": [
     {
@@ -153,7 +154,7 @@
                           "allowGatewayTransit": "false",
                           "useRemoteGateways": "false",
                           "remoteVirtualNetwork": {
-                              "id": "[resourceId('COLAB-USV1-PRD-DEF-DEVOPS-RG', Microsoft.Network/virtualNetworks', parameters('devOpsVnetName'))]"
+                              "id": "[resourceId(variables('rgName'), Microsoft.Network/virtualNetworks', parameters('devOpsVnetName'))]"
 
                         
                           }
