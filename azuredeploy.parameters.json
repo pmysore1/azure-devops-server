@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "value": "colab-dc-admin"
+    },
+    "adminPassword": {
+      "value": "$ept$mber2o1q"
+    },
+    "domainName": {
+      "value": "rollsroycegov.com"
+    },
+    "managementVnetName": {
+      "value": "COLAB-USV1-PRD-MGMT-VNET01"
+    },
+    "managementResourceGroupName": {
+      "value": "COLAB-USV1-PRD-MGMT-RG"
+    },
+    "appName": {
+      "value": "DEVOPS-SERVER"
+    },
+
+    "appSubnetName": {
+      "value": "DevOpsAppSubnet"
+    },
+    "appSubnetCIDR": {
+        "value": "$ept$mber2o1q"
+    },
+    "devOpsVnetCIDR": {
+        "value": "rollsroycegov"
+    },
+    "devOpsVnetName": {
+        "value": "COLAB-USV1-PRD-DEVOPS-VNET01"
+    },
+    "tfsVMName": {
+      "value": "rollsroycegov"
+    },
+    "workspaces_log_analytics_name": {
+        "value": "rollsroycegov-log-analytics"
+    },
+    "imageSKU": {
+        "value": "2019-Datacenter"
+    },
+
+    "tags": {
+      "value": {
+      "BusinessGroup": "DEF",
+      "Environment": "PRD",
+      "Region": "USV1",
+      "Service": "COLAB"
+      }
+    },
+    "dnsServers": {
+      "value": [
+     "10.0.0.0",
+     "10.0.0.1"
+     ]
+    }
+  }
+}

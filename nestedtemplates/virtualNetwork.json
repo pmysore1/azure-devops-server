@@ -1,0 +1,182 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "devOpsVnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the virtual network to create"
+      }
+    },
+    "managementVnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Management Vnet where Active directory is deployed"
+      }
+    },
+    "managementResourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Management Resource Group"
+      }
+    },
+    "vnetCIDR": {
+      "type": "string"
+     },
+    "loadBalancerName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the load balancer to create"
+      }
+    },
+    "subnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of subnet to create"
+      }
+    },
+    "subnetCIDR": {
+      "type": "string",
+      "metadata": {
+        "description": "DevOps server subnet cidr"
+      }
+    },
+    "loadBalancerBackendName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of load balancer backend to create"
+      }
+    },
+    "availabilitySetName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the availability set to create"
+      }
+    },
+    "dnsServers": {
+      "type": "array",
+      "metadata": {
+        "description": "List of DNS servers in the network"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    }
+  },
+  "variables": {
+ 
+    "lbFrontEndName": "[concat(parameters('loadBalancerName'), '-lb-frontend')]",
+    "lbBackEndName": "[concat(parameters('loadBalancerName'), '-lb-backendend')]",
+    "publicIpID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIpName'))]",
+    "loadBalancerID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]",
+    "frontEndIPConfigID": "[concat(variables('loadBalancerID'),'/frontendIPConfigurations/', variables('lbFrontEndName'))]",
+    "remoteVNet": "[resourceId(parameters('managementResourceGroupName'), 'Microsoft.Network/virtualNetworks', parameters('managementVnetName'))]",
+    "peeringName": "[concat(parameters('devOpsVnetName'), '/peering-to-mgmt-vnet')]",
+    "mgmtPeeringName": "[concat(parameters('managementVnetName'), '/peering-to-devops-vnet')]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-09-01",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[parameters('devOpsVnetName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vnetCIDR')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('subnetName')]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetCIDR')]"
+            }
+          }
+        ],
+        "dhcpOptions": {
+          "dnsServers": "[parameters('dnsServers')]"
+        }
+      },
+      "resources": [
+       {
+            "apiVersion": "2016-06-01",
+            "type": "virtualNetworkPeerings",
+            "name": "[variables('peeringName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/virtualNetworks/', parameters('devOpsVnetName'))]",
+            ],
+            "comments": "This is the peering from vNet 1 to vNet 2",
+            "properties": {
+                "allowVirtualNetworkAccess": "true",
+                "allowForwardedTraffic": "false",
+                "allowGatewayTransit": "false",
+                "useRemoteGateways": "false",
+                "remoteVirtualNetwork": {
+                    "id": "[resourceId('Microsoft.Network/virtualNetworks',parameters('devOpsVnetName'))]"
+              
+                }
+
+            }
+        }
+     ]
+    },
+    {
+      "apiVersion": "2017-05-10",
+      "name": "PeeringFromMgmtToDevOps",
+      "type": "Microsoft.Resources/deployments",
+      "resourceGroup": "[parameters('managementResourceGroupName')]",
+      "properties": {
+          "mode": "Incremental",
+          "template": {
+              "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {},
+              "variables": {},
+              "resources": [
+                  {
+                      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+                      "name": "[variables('mgmtPeeringName')]",
+                      "apiVersion": "2017-06-01",
+                      "location": "[resourceGroup().location]",
+                      "dependsOn": [
+                          "[concat('Microsoft.Network/virtualNetworks/', parameters('devOpsVnetName'))]",
+                      ],
+                      "comments": "This is the peering from Management vNet to DevOps vNet",
+                      "properties": {
+                          "allowVirtualNetworkAccess": "true",
+                          "allowForwardedTraffic": "false",
+                          "allowGatewayTransit": "false",
+                          "useRemoteGateways": "false",
+                          "remoteVirtualNetwork": {
+                              "id": "[variables('remoteVNet')]"
+                        
+                          }
+
+                      }
+                  }
+              ]
+          },
+          "parameters": {}
+      }
+    },
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "name": "[parameters('availabilitySetName')]",
+      "apiVersion": "2017-03-30",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Aligned"
+      },
+      "properties": {
+        "PlatformUpdateDomainCount": 5,
+        "PlatformFaultDomainCount": 2
+      }
+    }
+  ]
+}
