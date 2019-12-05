@@ -25,16 +25,16 @@
       "value": "DevOpsAppSubnet"
     },
     "appSubnetCIDR": {
-        "value": "$ept$mber2o1q"
+        "value": "10.3.0.32/27"
     },
     "devOpsVnetCIDR": {
-        "value": "rollsroycegov"
+        "value": "10.3.0.0/26"
     },
     "devOpsVnetName": {
         "value": "COLAB-USV1-PRD-DEVOPS-VNET01"
     },
     "tfsVMName": {
-      "value": "rollsroycegov"
+      "value": "COLAB-PRD-DEVOPS-APP-1"
     },
     "workspaces_log_analytics_name": {
         "value": "rollsroycegov-log-analytics"
@@ -53,8 +53,8 @@
     },
     "dnsServers": {
       "value": [
-     "10.0.0.0",
-     "10.0.0.1"
+     "10.2.0.70",
+     "10.2.0.71"
      ]
     }
   }

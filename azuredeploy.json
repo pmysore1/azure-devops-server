@@ -32,7 +32,7 @@
       "metadata": {
         "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
       },
-      "defaultValue": "https://raw.githubusercontent.com/pmysore1/azure-devops-server/master"
+      "defaultValue": "https://raw.githubusercontent.com/pmysore1/azure-devops-server/master/"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
@@ -84,6 +84,12 @@
      },
      "dnsServers": {
       "type": "array"
+     },
+     "workspaces_log_analytics_name": {
+      "type": "string"
+     },
+     "imageSKU": {
+      "type": "string"
      }
   },
   "variables": {
@@ -112,7 +118,7 @@
         },
         "parameters": {
           "devOpsVnetName": {
-            "value": "[parameters('vnetName')]"
+            "value": "[parameters('devOpsVnetName')]"
           },
           "managementVnetName": {
             "value": "[parameters('managementVnetName')]"
@@ -169,7 +175,7 @@
             "value": "[parameters('domainName')]"
           },
           "existingVnetName": {
-            "value": "[variables('vnetName')]"
+            "value": "[variables('devOpsVnetName')]"
           },
           "existingSubnetName": {
             "value": "[variables('subnetName')]"
@@ -223,7 +229,7 @@
             "value": "[parameters('domainName')]"
           },
           "existingVnetName": {
-            "value": "[variables('vnetName')]"
+            "value": "[variables('devOpsVnetName')]"
           },
           "existingSubnetName": {
             "value": "[variables('subnetName')]"
