@@ -15,7 +15,7 @@
       "value": "COLAB-USV1-PRD-MGMT-VNET01"
     },
     "managementResourceGroupName": {
-      "value": "COLAB-USV1-PRD-MGMT-RG"
+      "value": "COLAB-USV1-PRD-DEF-MGMT-RG"
     },
     "appName": {
       "value": "DEVOPS-SERVER"
