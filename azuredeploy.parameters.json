@@ -42,7 +42,12 @@
     "imageSKU": {
         "value": "2019-Datacenter"
     },
-
+    "sqlAdministratorLogin": {
+      "value": "devops-sql-admin"
+    },
+    "sqlAdministratorLoginPassword": {
+        "value": "$ept$mber2o1q"
+    },
     "tags": {
       "value": {
       "BusinessGroup": "DEF",

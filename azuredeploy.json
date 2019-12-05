@@ -90,6 +90,12 @@
      },
      "imageSKU": {
       "type": "string"
+     },
+     "sqlAdministratorLogin": {
+      "type": "string"
+     },
+     "sqlAdministratorLoginPassword": {
+      "type": "string"
      }
   },
   "variables": {
@@ -174,20 +180,17 @@
           "domainName": {
             "value": "[parameters('domainName')]"
           },
-          "existingVnetName": {
-            "value": "[parameters('devOpsVnetName')]"
-          },
-          "existingSubnetName": {
-            "value": "[variables('subnetName')]"
-          },
-          "existingAvailabilitySetName": {
-            "value": "[variables('availabilitySetName')]"
-          },
           "existingLoadBalancerName": {
             "value": "[variables('loadBalancerName')]"
           },
           "existingLoadBalancerBackendName": {
             "value": "[variables('loadBalancerBackendName')]"
+          },
+          "sqlAdministratorLogin": {
+            "value": "[parameters('sqlAdministratorLogin')]"
+          },
+          "sqlAdministratorLoginPassword": {
+            "value": "[parameters('sqlAdministratorLoginPassword')]"
           },
           "_artifactsLocation": {
             "value": "[parameters('_artifactsLocation')]"
