@@ -71,7 +71,6 @@
  
     "lbFrontEndName": "[concat(parameters('loadBalancerName'), '-lb-frontend')]",
     "lbBackEndName": "[concat(parameters('loadBalancerName'), '-lb-backendend')]",
-    "publicIpID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIpName'))]",
     "loadBalancerID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]",
     "frontEndIPConfigID": "[concat(variables('loadBalancerID'),'/frontendIPConfigurations/', variables('lbFrontEndName'))]",
     "remoteVNet": "[resourceId(parameters('managementResourceGroupName'), 'Microsoft.Network/virtualNetworks', parameters('managementVnetName'))]",
