@@ -144,9 +144,6 @@
                       "name": "[variables('mgmtPeeringName')]",
                       "apiVersion": "2017-06-01",
                       "location": "[resourceGroup().location]",
-                      "dependsOn": [
-                          "[concat('Microsoft.Network/virtualNetworks/', parameters('devOpsVnetName'))]"
-                      ],
                       "comments": "This is the peering from Management vNet to DevOps vNet",
                       "properties": {
                           "allowVirtualNetworkAccess": "true",
