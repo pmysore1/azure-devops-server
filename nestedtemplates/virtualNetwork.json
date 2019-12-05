@@ -75,7 +75,7 @@
     "frontEndIPConfigID": "[concat(variables('loadBalancerID'),'/frontendIPConfigurations/', variables('lbFrontEndName'))]",
     "remoteVNet": "[resourceId(parameters('managementResourceGroupName'), 'Microsoft.Network/virtualNetworks', parameters('managementVnetName'))]",
     "peeringName": "[concat(parameters('devOpsVnetName'), '-peering-to-mgmt-vnet')]",
-    "mgmtPeeringName": "[concat(parameters('managementVnetName'), '/peering-to-devops-vnet')]"
+    "mgmtPeeringName": "[concat(parameters('managementVnetName'), '-peering-to-devops-vnet')]"
   },
   "resources": [
     {
