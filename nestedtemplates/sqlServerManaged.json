@@ -31,6 +31,24 @@
         "description": "Describes plan's instance count"
       }
     },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the administrator account to create"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the Administrator account"
+      }
+    },
+    "domainName": {
+      "type": "string",
+      "metadata": {
+        "description": "The FQDN of the Active Directory Domain to be created"
+      }
+    },
     "sqlAdministratorLogin": {
       "type": "string",
       "metadata": {
