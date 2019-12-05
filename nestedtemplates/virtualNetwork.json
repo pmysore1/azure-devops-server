@@ -74,8 +74,8 @@
     "loadBalancerID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]",
     "frontEndIPConfigID": "[concat(variables('loadBalancerID'),'/frontendIPConfigurations/', variables('lbFrontEndName'))]",
     "remoteVNet": "[resourceId(parameters('managementResourceGroupName'), 'Microsoft.Network/virtualNetworks', parameters('managementVnetName'))]",
-    "peeringName": "[concat(parameters('devOpsVnetName'), '/peering-to-mgmt-vnet')]",
-    "mgmtPeeringName": "[concat(parameters('managementVnetName'), '/peering-to-devops-vnet')]"
+    "peeringName": "[concat(parameters('devOpsVnetName'), '-peering-to-mgmt-vnet')]",
+    "mgmtPeeringName": "[concat(parameters('managementVnetName'), '-peering-to-devops-vnet')]"
   },
   "resources": [
     {
@@ -110,7 +110,7 @@
             "dependsOn": [
                 "[concat('Microsoft.Network/virtualNetworks/', parameters('devOpsVnetName'))]"
             ],
-            "comments": "This is the peering from vNet 1 to vNet 2",
+            "comments": "This is the peering from DevOps vNet to Management vNet",
             "properties": {
                 "allowVirtualNetworkAccess": "true",
                 "allowForwardedTraffic": "false",
