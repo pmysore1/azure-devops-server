@@ -140,7 +140,7 @@
           "type": "firewallrules",
           "apiVersion": "2014-04-01",
           "dependsOn": [
-            "[variables('sqlserverName')]"
+            "[parameters('sqlserverName')]"
           ],
           "location": "[parameters('location')]",
           "name": "AllowAllWindowsAzureIps",
@@ -155,7 +155,7 @@
   "outputs": {
     "sqlSvrFqdn": {
       "type": "string",
-      "value": "[reference(concat('Microsoft.Sql/servers/', variables('sqlserverName'))).fullyQualifiedDomainName]"
+      "value": "[reference(concat('Microsoft.Sql/servers/', parameters('sqlserverName'))).fullyQualifiedDomainName]"
     }
   }
 }
