@@ -194,8 +194,8 @@
           "name": "[concat('master/microsoft.insights/',variables('diagnosticSettingsName'))]",
           "dependsOn": [
             "[parameters('sqlServerName')]",
-            "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'), '/databases/', [parameters('sqlDBName1') )]",
-            "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'), '/databases/', [parameters('sqlDBName2') )]"
+            "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'), '/databases/', parameters('sqlDBName1') )]",
+            "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'), '/databases/', parameters('sqlDBName2') )]"
           ],
           "apiVersion": "2017-05-01-preview",
           "properties": {
