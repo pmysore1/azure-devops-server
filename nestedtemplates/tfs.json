@@ -98,6 +98,7 @@
   "variables": {
     "networkInterfaceName": "[concat(parameters('vmName'), '-nic')]",
     "loadBalancerBackendName": "[concat(parameters('loadBalancerName'), '-lb-backend')]",
+    "loadBalancerFrontendName": "[concat(parameters('loadBalancerName'), '-lb-frontend')]",
     "loadBalancerID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('existingVnetName'), parameters('existingSubnetName'))]"
   },
@@ -137,7 +138,7 @@
       "properties": {
         "frontendIPConfigurations": [
           {
-            "name": "[variables('loadBalancerBackendName')]",
+            "name": "[variables('loadBalancerFrontendName')]",
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
@@ -155,10 +156,10 @@
           {
             "properties": {
               "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')), '/frontendIpConfigurations/loadBalancerFrontEnd')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')), '/frontendIpConfigurations/', parameters('loadBalancerBackendName'))]"
               },
               "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')), '/backendAddressPools/loadBalancerBackEnd')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')), '/backendAddressPools/', parameters('loadBalancerBackendName'))]"
               },
               "probe": {
                 "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')), '/probes/lbprobe')]"
