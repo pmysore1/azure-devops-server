@@ -115,7 +115,7 @@
     "sqlSize": {
       "type": "string"
     },
-    "log-analytics-workspace-name": {
+    "logAnalyticsWorkspaceName": {
       "type": "string"
     }
   },
@@ -240,8 +240,8 @@
           "managementResourceGroupName": {
             "value": "[parameters('managementResourceGroupName')]"
           },
-          "log-analytics-workspace-name": {
-            "value": "[parameters('log-analytics-workspace-name')]"
+          "logAnalyticsWorkspaceName": {
+            "value": "[parameters('logAnalyticsWorkspaceName')]"
           }
         }
       }

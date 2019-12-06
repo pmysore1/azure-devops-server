@@ -126,7 +126,7 @@
     "sqlDBName2": {
       "type": "string"
     },
-    "log-analytics-workspace-name": {
+    "logAnalyticsWorkspaceName": {
       "type": "string"
     },
     "managementResourceGroupName": {
@@ -199,7 +199,7 @@
           "apiVersion": "2017-05-01-preview",
           "properties": {
             "name": "[variables('diagnosticSettingsName')]",
-            "workspaceId": "[resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces', parameters('log-analytics-workspace-name'))]",
+            "workspaceId": "[resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName'))]",
             "logs": [
               {
                 "category": "SQLSecurityAuditEvents",
