@@ -174,7 +174,7 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "adminUsername": {
+          "sqlserverName": {
             "value": "[parameters('sqlserverName')]"
           },
           "adminUsername": {
