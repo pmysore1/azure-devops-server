@@ -221,7 +221,10 @@
           "uri": "[variables('nestedTemplates').tfsServerTemplate]",
           "contentVersion": "1.0.0.0"
         },
-        "parameters": {
+        "parameters": { 
+          "virtualNetworkName": {
+            "value": "[parameters('devOpsVnetName')]"
+          },
           "vmName": {
             "value": "[parameters('tfsVMName')]"
           },
