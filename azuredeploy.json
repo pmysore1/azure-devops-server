@@ -99,7 +99,25 @@
      },
      "sqlAdministratorLoginPassword": {
       "type": "string"
-     }
+     },
+     "sqlDBName1": {
+      "type": "string"
+     },
+    "sqlDBName2": {
+      "type": "string"
+    },
+    "sqlTier": {
+      "type": "string"
+    },
+    "sqlFamily": {
+      "type": "string"
+    },
+    "sqlSize": {
+      "type": "string"
+    },
+    "log-analytics-workspace-name": {
+      "type": "string"
+    }
   },
   "variables": {
     "loadBalancerName": "[concat(parameters('appName'),'-lb')]",
@@ -203,6 +221,27 @@
           },
           "_artifactsLocationSasToken": {
             "value": "[parameters('_artifactsLocationSasToken')]"
+          },
+          "sqlDBName1": {
+            "value": "[parameters('sqlDBName1')]"
+          },
+          "sqlDBName2": {
+            "value": "[parameters('sqlDBName2')]"
+          },
+          "sqlTier": {
+            "value": "[parameters('sqlTier')]"
+          },
+          "sqlFamily": {
+            "value": "[parameters('sqlFamily')]"
+          },
+          "sqlSize": {
+            "value": "[parameters('sqlSize')]"
+          },
+          "managementResourceGroupName": {
+            "value": "[parameters('managementResourceGroupName')]"
+          },
+          "log-analytics-workspace-name": {
+            "value": "[parameters('log-analytics-workspace-name')]"
           }
         }
       }

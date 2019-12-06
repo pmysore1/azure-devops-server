@@ -104,25 +104,48 @@
       "metadata": {
         "description": "Location for all resources."
       }
+    },
+    "tags": {
+      "type": "object"
+    },
+    "sqlTier": {
+      "type": "string"
+    },
+    "sqlFamily": {
+      "type": "string"
+    },
+    "sqlSize": {
+      "type": "string"
+    },
+    "sqlDBName1": {
+      "type": "string"
+     },
+    "sqlDBName2": {
+      "type": "string"
+    },
+    "sqlDBName2": {
+      "type": "string"
+    },
+    "log-analytics-workspace-name": {
+      "type": "string"
     }
+    "managementResourceGroupName": {
+      "type": "string"
+      "value": "[parameters('managementResourceGroupName')]"
+    },
   },
   "variables": {
-    "databaseName": "sampledb"
+    "sqlFailoverGroupName": "[concat(parameters('sqlserverName'), '-failover-group')]",
+    "diagnosticSettingsName": "[concat(parameters('sqlserverName'), '-giagnostic')]"
+    
   },
   "resources": [
     {
       "name": "[parameters('sqlserverName')]",
       "type": "Microsoft.Sql/servers",
       "location": "[parameters('location')]",
-      "sku": {
-        "name": "[parameters('skuName')]",
-        "tier": "string",
-        "size": "string",
-        "family": "string",
-        "capacity": "[parameters('skuCapacity')]"
-      },
       "tags": {
-        "displayName": "SqlServer"
+        "DisplayName": "[parameters('sqlServerName')]"
       },
       "apiVersion": "2014-04-01",
       "properties": {
@@ -132,30 +155,64 @@
       },
       "resources": [
         {
-          "name": "[variables('databaseName')]",
+          "name": "[variables('sqlDBName1')]",
           "type": "databases",
           "location": "[parameters('location')]",
-          "tags": {
-            "displayName": "Database"
-          },
+          "tags": "[parameters('tags')]",
           "apiVersion": "2015-01-01",
           "dependsOn": [
             "[parameters('sqlserverName')]"
           ],
           "sku": {
             "name": "[parameters('skuName')]",
-            "tier": "string",
-            "size": "string",
-            "family": "string",
-            "capacity": "[parameters('skuCapacity')]"
+            "tier": "[parameters('sqlTier')]",
           },
           "properties": {
             "collation": "SQL_Latin1_General_CP1_CI_AS",
-            "maxSizeBytes": "1073741824",
-            "requestedServiceObjectiveName": "Basic"
+            "maxSizeBytes": "1073741824"
           }
         },
-        
+        {
+          "name": "[variables('sqlDBName2')]",
+          "type": "databases",
+          "location": "[parameters('location')]",
+          "tags": "[parameters('tags')]",
+          "apiVersion": "2015-01-01",
+          "dependsOn": [
+            "[parameters('sqlserverName')]"
+          ],
+          "sku": {
+            "name": "[parameters('skuName')]",
+            "tier": "[parameters('sqlTier')]",
+          },
+          "properties": {
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxSizeBytes": "1073741824"
+          }
+        },
+        {
+          "type": "databases/providers/diagnosticSettings",
+          "name": "[concat('master/microsoft.insights/',variables('diagnosticSettingsName'))]",
+          "dependsOn": [
+            "[parameters('sqlServerName')]",
+            "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'), '/databases/master')]"
+          ],
+          "apiVersion": "2017-05-01-preview",
+          "properties": {
+            "name": "[variables('diagnosticSettingsName')]",
+            "workspaceId": "[resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces', parameters('log-analytics-workspace-name'))]",
+            "logs": [
+              {
+                "category": "SQLSecurityAuditEvents",
+                "enabled": true,
+                "retentionPolicy": {
+                  "days": 0,
+                  "enabled": false
+                }
+              }
+            ]
+          }
+        },
         {
           "type": "firewallrules",
           "apiVersion": "2014-04-01",
