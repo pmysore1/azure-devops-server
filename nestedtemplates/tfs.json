@@ -87,6 +87,12 @@
       "metadata": {
         "description": "Location for all resources."
       }
+    },
+    "virtualNetworkName": {
+      "type": "string",
+      "metadata": {
+        "description": "Virtual Network name."
+      }
     }
   },
   "variables": {
@@ -126,7 +132,7 @@
       "type": "Microsoft.Network/loadBalancers",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+        "[concat('Microsoft.Network/virtualNetworks/', parameter('virtualNetworkName'))]"
       ],
       "properties": {
         "frontendIPConfigurations": [
@@ -296,7 +302,7 @@
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ConfigureTfsRemoteSql.ps1', ' ', parameters('ExistingSqlInstance'), ' ', concat(parameters('domainName'), '\\', parameters('adminUsername')), ' ', parameters('adminPassword'))]"
+          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ConfigureTfsRemoteSql.ps1', ' ', parameters('existingSqlInstance'), ' ', concat(parameters('domainName'), '\\', parameters('adminUsername')), ' ', parameters('adminPassword'))]"
         }
       }
     }

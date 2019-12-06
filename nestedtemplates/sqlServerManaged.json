@@ -31,6 +31,13 @@
         "description": "Describes plan's instance count"
       }
     },
+    "skuTier": {
+      "type": "string",
+      "defaultValue": "Standard",
+      "metadata": {
+        "description": "The name of the SQL server"
+      }
+    },
     "sqlserverName": {
       "type": "string",
       "metadata": {
@@ -107,6 +114,13 @@
       "name": "[parameters('sqlserverName')]",
       "type": "Microsoft.Sql/servers",
       "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('skuName')]",
+        "tier": "string",
+        "size": "string",
+        "family": "string",
+        "capacity": "[parameters('skuCapacity')]"
+      },
       "tags": {
         "displayName": "SqlServer"
       },
