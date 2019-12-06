@@ -142,8 +142,14 @@
           "dependsOn": [
             "[parameters('sqlserverName')]"
           ],
+          "sku": {
+            "name": "[parameters('skuName')]",
+            "tier": "string",
+            "size": "string",
+            "family": "string",
+            "capacity": "[parameters('skuCapacity')]"
+          },
           "properties": {
-            "edition": "Basic",
             "collation": "SQL_Latin1_General_CP1_CI_AS",
             "maxSizeBytes": "1073741824",
             "requestedServiceObjectiveName": "Basic"
