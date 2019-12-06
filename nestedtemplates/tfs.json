@@ -131,9 +131,6 @@
       "name": "[parameters('loadBalancerName')]",
       "type": "Microsoft.Network/loadBalancers",
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat(resourceGroup().name,'Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
-      ],
       "properties": {
         "frontendIPConfigurations": [
           {
