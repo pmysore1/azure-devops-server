@@ -242,6 +242,9 @@
           },
           "logAnalyticsWorkspaceName": {
             "value": "[parameters('logAnalyticsWorkspaceName')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
           }
         }
       }

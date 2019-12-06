@@ -154,7 +154,7 @@
       },
       "resources": [
         {
-          "name": "[variables('sqlDBName1')]",
+          "name": "[parameters('sqlDBName1')]",
           "type": "databases",
           "location": "[parameters('location')]",
           "tags": "[parameters('tags')]",
@@ -164,7 +164,7 @@
           ],
           "sku": {
             "name": "[parameters('skuName')]",
-            "tier": "[parameters('sqlTier')]",
+            "tier": "[parameters('sqlTier')]"
           },
           "properties": {
             "collation": "SQL_Latin1_General_CP1_CI_AS",
@@ -172,7 +172,7 @@
           }
         },
         {
-          "name": "[variables('sqlDBName2')]",
+          "name": "[parameters('sqlDBName2')]",
           "type": "databases",
           "location": "[parameters('location')]",
           "tags": "[parameters('tags')]",
@@ -182,7 +182,7 @@
           ],
           "sku": {
             "name": "[parameters('skuName')]",
-            "tier": "[parameters('sqlTier')]",
+            "tier": "[parameters('sqlTier')]"
           },
           "properties": {
             "collation": "SQL_Latin1_General_CP1_CI_AS",
