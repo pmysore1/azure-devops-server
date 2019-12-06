@@ -107,6 +107,9 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(parameters('loadBalancerName'), '-nic')]",
       "location": "[parameters('location')]",
+      "dependsOn": [
+        "[parameters('loadBalancerName')]"
+    ],
       "properties": {
         "ipConfigurations": [
           {
@@ -118,7 +121,7 @@
               },
               "loadBalancerBackendAddressPools": [
                 {
-                  "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')),'/backendAddressPools/loadBalancerBackEnd')]"
+                  "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')),'/backendAddressPools/', variables('loadBalancerBackendName'))]"
                 }
               ]
             }
@@ -145,7 +148,7 @@
         ],
         "backendAddressPools": [
           {
-            "name": "[variables('lbBackEndName')]"
+            "name": "[variables('loadBalancerBackendName')]"
           }
         ],
         "loadBalancingRules": [
