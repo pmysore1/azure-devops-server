@@ -43,7 +43,7 @@
         "value": "2019-Datacenter"
     },
     "sqlserverName": {
-      "value": "COLAB-PRD-DEVOPS-SQL-DB"
+      "value": "colab-prd-devops-sql-db"
     },
     "sqlAdministratorLogin": {
       "value": "devops-sql-admin"

@@ -101,9 +101,6 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(parameters('loadBalancerName'), '-nic')]",
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/loadBalancers/', parameter('loadBalancerName'))]"
-      ],
       "properties": {
         "ipConfigurations": [
           {

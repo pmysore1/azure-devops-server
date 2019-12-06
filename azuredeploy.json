@@ -246,10 +246,10 @@
           "existingAvailabilitySetName": {
             "value": "[variables('availabilitySetName')]"
           },
-          "existingLoadBalancerName": {
+          "loadBalancerName": {
             "value": "[variables('loadBalancerName')]"
           },
-          "existingLoadBalancerBackendName": {
+          "loadBalancerBackendName": {
             "value": "[variables('loadBalancerBackendName')]"
           },
           "existingSqlInstance": {
