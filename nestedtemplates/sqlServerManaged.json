@@ -31,6 +31,12 @@
         "description": "Describes plan's instance count"
       }
     },
+    "sqlserverName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the SQL server"
+      }
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {

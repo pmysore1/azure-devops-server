@@ -42,6 +42,9 @@
     "imageSKU": {
         "value": "2019-Datacenter"
     },
+    "sqlserverName": {
+      "value": "COLAB-PRD-DEVOPS-SQL-DB"
+    },
     "sqlAdministratorLogin": {
       "value": "devops-sql-admin"
     },
