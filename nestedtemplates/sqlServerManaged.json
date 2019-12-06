@@ -128,15 +128,14 @@
     },
     "log-analytics-workspace-name": {
       "type": "string"
-    }
+    },
     "managementResourceGroupName": {
       "type": "string"
-      "value": "[parameters('managementResourceGroupName')]"
-    },
+    }
   },
   "variables": {
     "sqlFailoverGroupName": "[concat(parameters('sqlserverName'), '-failover-group')]",
-    "diagnosticSettingsName": "[concat(parameters('sqlserverName'), '-giagnostic')]"
+    "diagnosticSettingsName": "[concat(parameters('sqlserverName'), '-diagnostic')]"
     
   },
   "resources": [
