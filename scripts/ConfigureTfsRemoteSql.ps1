@@ -7,20 +7,20 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-# TFS 2017 Update 2
-$TfsDownloadUrl = 'https://go.microsoft.com/fwlink/?LinkId=2089023'
+# DevOps 2017 Update 2
+$DevOpsDownloadUrl = 'https://go.microsoft.com/fwlink/?LinkId=2089023'
 $InstallDirectory = 'C:\Program Files\Azure DevOps Server 2019'
-$InstallKey = 'HKLM:\SOFTWARE\Microsoft\DevDiv\tfs\Servicing\15.0\serverCore'
+$InstallKey = 'HKLM:\SOFTWARE\Microsoft\DevDiv\DevOps\Servicing\15.0\serverCore'
 $ssmsUrl = 'https://aka.ms/ssmsfullsetup'
 
 
 $PsToolsDownloadUrl = 'https://download.sysinternals.com/files/PSTools.zip'
 
-# Checks if TFS is installed, if not downloads and runs the web installer
-function Ensure-TfsInstalled()
+# Checks if DevOps is installed, if not downloads and runs the web installer
+function Ensure-DevOpsInstalled()
 {
-    # Check if TFS is already installed
-    $tfsInstalled = $false
+    # Check if DevOps is already installed
+    $DevOpsInstalled = $false
 
     if(Test-Path $InstallKey)
     {
@@ -29,15 +29,15 @@ function Ensure-TfsInstalled()
 
         if(($value -ne $null) -and ($value -eq 1))
         {
-            $tfsInstalled = $true
+            $DevOpsInstalled = $true
         }
     }
 
-    if(-not $tfsInstalled)
+    if(-not $DevOpsInstalled)
     {
-        Write-Verbose "Installing TFS using web installer"
+        Write-Verbose "Installing DevOps using web installer"
 
-        # Download TFS install to a temp folder, then run it
+        # Download DevOps install to a temp folder, then run it
         $parent = [System.IO.Path]::GetTempPath()
         [string] $name = [System.Guid]::NewGuid()
         [string] $fullPath = Join-Path $parent $name
@@ -45,9 +45,9 @@ function Ensure-TfsInstalled()
         try 
         {
             New-Item -ItemType Directory -Path $fullPath
-            $serverLocation = Join-Path $fullPath 'tfsserver.exe'
+            $serverLocation = Join-Path $fullPath 'DevOpsserver.exe'
 
-            Invoke-WebRequest -UseBasicParsing -Uri $TfsDownloadUrl -OutFile $serverLocation
+            Invoke-WebRequest -UseBasicParsing -Uri $DevOpsDownloadUrl -OutFile $serverLocation
             
             $process = Start-Process -FilePath $serverLocation -ArgumentList '/quiet' -PassThru
             $process.WaitForExit()
@@ -59,7 +59,7 @@ function Ensure-TfsInstalled()
     }
     else
     {
-        Write-Verbose "TFS is already installed"
+        Write-Verbose "DevOps is already installed"
     }
 }
 function installSQLManagementStudio()
@@ -111,12 +111,12 @@ function Download-PsTools()
     }
 }
 
-function Configure-TfsRemoteSql()
+function Configure-DevOpsRemoteSql()
 {
-    # Run tfsconfig to do the unattend install
-    $path = Join-Path $InstallDirectory '\tools\tfsconfig.exe'
+    # Run DevOpsconfig to do the unattend install
+    $path = Join-Path $InstallDirectory '\tools\DevOpsconfig.exe'
 
-    Write-Verbose "Running tfsconfig..."
+    Write-Verbose "Running DevOpsconfig..."
 
     # The System account running this script for the VM Extension is not allowed to impersonate, 
     # so we can't use Start-Process with the -Credential parameter to run setup as a domain user with access to SQL
@@ -125,10 +125,11 @@ function Configure-TfsRemoteSql()
     
     if($LASTEXITCODE)
     {
-        throw "tfsconfig.exe failed with exit code $LASTEXITCODE . Check the TFS logs for more information"
+        throw "DevOpsconfig.exe failed with exit code $LASTEXITCODE . Check the DevOps logs for more information"
     }
 }
 
-Ensure-TfsInstalled
+Ensure-DevOpsInstalled
 Download-PsTools
-#Configure-TfsRemoteSql
+installSQLManagementStudio
+#Configure-DevOpsRemoteSql

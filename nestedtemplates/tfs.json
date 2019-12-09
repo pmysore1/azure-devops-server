@@ -315,11 +315,10 @@
         "typeHandlerVersion": "1.0",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "workspaceId": "[resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName'))]"
-
+          "workspaceId": "[reference(resourceId(parameters('managementResourceGroupName'),'Microsoft.Resources/deployments','deploy-log-analytics-workspace'),'2015-01-01').outputs.workspaceId.value]"
         },
         "protectedSettings": {
-          "workspaceKey": "[listKeys(resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces/', parameters('logAnalyticsWorkspaceName')), '2017-04-26-preview').primarySharedKey]"
+          "workspaceKey": "[reference(resourceId(parameters('managementResourceGroupName'),'Microsoft.Resources/deployments','deploy-log-analytics-workspace'),'2015-01-01').outputs.workspaceKey.value]"
         }
       }
     },
@@ -371,7 +370,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-            "[concat(parameters('_artifactsLocation'), '/scripts/ConfigureTfsRemoteSql.ps1', parameters('_artifactsLocationSasToken'))]"
+            "[concat(parameters('_artifactsLocation'), 'scripts/ConfigureTfsRemoteSql.ps1', parameters('_artifactsLocationSasToken'))]"
           ]
         },
         "protectedSettings": {
