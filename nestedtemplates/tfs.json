@@ -129,7 +129,7 @@
         "PlatformUpdateDomainCount": 5,
         "PlatformFaultDomainCount": 2
       }
-    }
+    },
     {
       "apiVersion": "2015-06-15",
       "name": "[parameters('loadBalancerName')]",
