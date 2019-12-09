@@ -291,11 +291,11 @@
         "typeHandlerVersion": "1.0",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "workspaceId": "[reference(concat('deploy-log-analytics-workspace')).outputs.workspaceId.value]"
+          "workspaceId": "[resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName'))]"
 
         },
         "protectedSettings": {
-          "workspaceKey": "[reference('deploy-log-analytics-workspace').outputs.workspaceKey.value]"
+          "workspaceKey": "[listKeys(resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces/', parameters('omsWorkspaceName')), '2017-04-26-preview').primarySharedKey]"
         }
       }
     },
