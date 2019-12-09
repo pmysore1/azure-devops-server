@@ -295,7 +295,7 @@
 
         },
         "protectedSettings": {
-          "workspaceKey": "[listKeys(resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces/', parameters('omsWorkspaceName')), '2017-04-26-preview').primarySharedKey]"
+          "workspaceKey": "[listKeys(resourceId(parameters('managementResourceGroupName'),'Microsoft.OperationalInsights/workspaces/', parameters('logAnalyticsWorkspaceName')), '2017-04-26-preview').primarySharedKey]"
         }
       }
     },
