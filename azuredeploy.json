@@ -20,13 +20,6 @@
         "description": "The FQDN of the Active Directory Domain to be created"
       }
     },
-    "vmSize": {
-      "type": "string",
-      "metadata": {
-        "description": "The size of the VMs to create"
-      },
-      "defaultValue": "Standard_D4_v3"
-    },
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
@@ -81,6 +74,23 @@
      },
      "tfsVMName": {
       "type": "string"
+     },
+     "vmSize": {
+      "type": "string",
+      "metadata": {
+        "description": "The size of the VMs to create"
+      },
+      "defaultValue": "Standard_D4_v3"
+     },
+     "devOpsSearchVMName": {
+      "type": "string"
+     },
+     "devOpsSearchVMSize": {
+      "type": "string",
+      "metadata": {
+        "description": "The size of the VMs to create"
+      },
+      "defaultValue": "Standard_D4_v3"
      },
      "dnsServers": {
       "type": "array"
@@ -305,6 +315,78 @@
           },
           "_artifactsLocationSasToken": {
             "value": "[parameters('_artifactsLocationSasToken')]"
+          },
+          "managementResourceGroupName": {
+            "value": "[parameters('managementResourceGroupName')]"
+          },
+          "logAnalyticsWorkspaceName": {
+            "value": "[parameters('logAnalyticsWorkspaceName')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "DevOps-Search-App",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-08-01",
+      "comments": "This creates the DevOps search VM",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/SQLServer"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('nestedTemplates').tfsServerTemplate]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": { 
+          "virtualNetworkName": {
+            "value": "[parameters('devOpsVnetName')]"
+          },
+          "vmName": {
+            "value": "[parameters('devOpsSearchVMName')]"
+          },
+          "vmSize": {
+            "value": "[parameters('devOpsSearchVMSize')]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
+          "existingVnetName": {
+            "value": "[parameters('devOpsVnetName')]"
+          },
+          "existingSubnetName": {
+            "value": "[variables('subnetName')]"
+          },
+          "existingAvailabilitySetName": {
+            "value": "[variables('availabilitySetName')]"
+          },
+          "loadBalancerName": {
+            "value": "[variables('loadBalancerName')]"
+          },
+          "loadBalancerBackendName": {
+            "value": "[variables('loadBalancerBackendName')]"
+          },
+          "existingSqlInstance": {
+            "value": "[concat('tfsSQL', '.', parameters('domainName'))]"
+          },
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
+          },
+          "managementResourceGroupName": {
+            "value": "[parameters('managementResourceGroupName')]"
+          },
+          "logAnalyticsWorkspaceName": {
+            "value": "[parameters('logAnalyticsWorkspaceName')]"
           }
         }
       }
