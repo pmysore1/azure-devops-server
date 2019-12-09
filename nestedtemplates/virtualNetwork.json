@@ -162,19 +162,7 @@
           },
           "parameters": {}
       }
-    },
-    {
-      "type": "Microsoft.Compute/availabilitySets",
-      "name": "[parameters('availabilitySetName')]",
-      "apiVersion": "2017-03-30",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "Aligned"
-      },
-      "properties": {
-        "PlatformUpdateDomainCount": 5,
-        "PlatformFaultDomainCount": 2
-      }
     }
+   
   ]
 }

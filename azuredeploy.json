@@ -298,7 +298,7 @@
           "existingSubnetName": {
             "value": "[variables('subnetName')]"
           },
-          "existingAvailabilitySetName": {
+          "availabilitySetName": {
             "value": "[variables('availabilitySetName')]"
           },
           "loadBalancerName": {
@@ -364,7 +364,7 @@
           "existingSubnetName": {
             "value": "[variables('subnetName')]"
           },
-          "existingAvailabilitySetName": {
+          "availabilitySetName": {
             "value": "devops-search-availset"
           },
           "loadBalancerName": {
