@@ -15,11 +15,19 @@
       },
       "defaultValue": "Standard_D4_v3"
     },
+    "vmAdminUsername": {
+      "type": "string",
+      "defaultValue": "colab-devops-admin",
+      "metadata": {
+        "description": "The name of the administrator account to create"
+      }
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {
         "description": "The name of the administrator account to create"
       }
+
     },
     "adminPassword": {
       "type": "securestring",
@@ -230,7 +238,7 @@
         },
         "osProfile": {
           "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('adminUsername')]",
+          "adminUsername": "[parameters('vmAdminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
