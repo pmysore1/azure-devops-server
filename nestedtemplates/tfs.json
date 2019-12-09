@@ -279,11 +279,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(concat(variables('adPDCVMName')),'/OMSExtension')]",
+      "name": "[concat(concat(variables('vmName')),'/OMSExtension')]",
       "apiVersion": "2017-12-01",
       "location": "[parameters('location')]",
       "dependsOn": [
-          "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]",
+          "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
       ],
       "properties": {
         "publisher": "Microsoft.EnterpriseCloud.Monitoring",
@@ -302,7 +302,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "apiVersion": "2018-10-01",
-      "name": "[concat(variables('adPDCVMName'), '/IaaSAntimalware')]",
+      "name": "[concat(variables('vmName'), '/IaaSAntimalware')]",
       "location": "[parameters('location')]",
       "dependsOn": [
           "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
