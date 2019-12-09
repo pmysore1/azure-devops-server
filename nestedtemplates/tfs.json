@@ -184,7 +184,7 @@
       "name": "[variables('networkInterfaceName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/loadBalancers/',variables('loadBalancerName'))]"
+        "[concat('Microsoft.Network/loadBalancers/',parameters('loadBalancerName'))]"
       ],
       "properties": {
         "ipConfigurations": [
