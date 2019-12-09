@@ -260,7 +260,7 @@
       }
     },
     {
-      "name": "TfsServer",
+      "name": "DevOpsServer",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-08-01",
       "comments": "This creates the TFS VM",
@@ -368,10 +368,10 @@
             "value": "[variables('availabilitySetName')]"
           },
           "loadBalancerName": {
-            "value": "[variables('loadBalancerName')]"
+            "value": "DEVOPS-SEARCH-APP-LB"
           },
           "loadBalancerBackendName": {
-            "value": "[variables('loadBalancerBackendName')]"
+            "value": "DEVOPS-SEARCH-APP-LB-backend"
           },
           "existingSqlInstance": {
             "value": "[concat('tfsSQL', '.', parameters('domainName'))]"

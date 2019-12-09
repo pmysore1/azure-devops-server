@@ -183,6 +183,9 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('networkInterfaceName')]",
       "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/loadBalancers/',variables('loadBalancerName'))]"
+      ],
       "properties": {
         "ipConfigurations": [
           {
