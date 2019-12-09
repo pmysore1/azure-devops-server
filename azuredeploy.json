@@ -365,7 +365,7 @@
             "value": "[variables('subnetName')]"
           },
           "existingAvailabilitySetName": {
-            "value": "[variables('availabilitySetName')]"
+            "value": "devops-search-availset"
           },
           "loadBalancerName": {
             "value": "DEVOPS-SEARCH-APP-LB"
