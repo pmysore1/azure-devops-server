@@ -192,9 +192,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-08-01",
       "comments": "This creates the TFS VM",
-      "dependsOn": [
-        "Microsoft.Resources/deployments/SQLServer"
-      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -258,9 +255,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-08-01",
       "comments": "This creates the DevOps search VM",
-      "dependsOn": [
-        "Microsoft.Resources/deployments/SQLServer"
-      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {

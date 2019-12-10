@@ -131,7 +131,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2019-04-01",
       "name": "[parameters('loadBalancerName')]",
       "type": "Microsoft.Network/loadBalancers",
       "location": "[parameters('location')]",
