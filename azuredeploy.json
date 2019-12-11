@@ -127,6 +127,9 @@
     },
     "logAnalyticsWorkspaceName": {
       "type": "string"
+    },
+    "external_ips": {
+      "type": "string"
     }
   },
   "variables": {
@@ -194,7 +197,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-08-01",
       "comments": "This creates the DevOps VM",
-      "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/',variables('nsgName'),'-resource')]"
        ],
@@ -264,7 +266,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-08-01",
       "comments": "This creates the DevOps search VM",
-      "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/',variables('nsgName'),'-resource')]"
        ],

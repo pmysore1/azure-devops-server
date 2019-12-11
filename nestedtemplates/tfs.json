@@ -221,7 +221,7 @@
           {
             "name": "ipconfig1",
             "networkSecurityGroup": {
-              "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('nsgName'))]"
+              "id": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('nsgName'))]"
             },
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
