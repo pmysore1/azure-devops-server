@@ -217,12 +217,12 @@
         "[concat('Microsoft.Network/loadBalancers/',parameters('loadBalancerName'))]"
       ],
       "properties": {
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('nsgName'))]"
+        },
         "ipConfigurations": [
           {
             "name": "ipconfig1",
-            "networkSecurityGroup": {
-              "id": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('nsgName'))]"
-            },
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "loadBalancerBackendAddressPools": [
