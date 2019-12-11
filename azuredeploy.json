@@ -257,7 +257,10 @@
           },
           "nsgName": {
             "value": "[variables('nsgName')]"
-          }
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          },
         }
       }
     },
@@ -301,7 +304,7 @@
             "value": "[variables('subnetName')]"
           },
           "availabilitySetName": {
-            "value": "devops-search-availset"
+            "value": "DEVOPS-SEARCH-availset"
           },
           "loadBalancerName": {
             "value": "DEVOPS-SEARCH-APP-LB"
@@ -326,7 +329,10 @@
           },
           "nsgName": {
             "value": "[variables('nsgName')]"
-          }
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          },
         }
       }
     },

@@ -110,7 +110,10 @@
     },
     "nsgName": {
       "type": "string"
-    }
+    },
+    "tags": {
+      "type": "object"
+    },
   },
   "variables": {
     "networkInterfaceName": "[concat(parameters('vmName'), '-nic')]",
@@ -144,6 +147,7 @@
       "dependsOn": [
         "[concat('Microsoft.Compute/availabilitySets/',parameters('availabilitySetName'))]"
       ],
+      "tags": "[parameters('tags')]",
       "properties": {
         "frontendIPConfigurations": [
           {
@@ -217,9 +221,6 @@
         "[concat('Microsoft.Network/loadBalancers/',parameters('loadBalancerName'))]"
       ],
       "properties": {
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('nsgName'))]"
-        },
         "ipConfigurations": [
           {
             "name": "ipconfig1",
@@ -248,6 +249,7 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
       "identity": {
         "type": "SystemAssigned"
         },
