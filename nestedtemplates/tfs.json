@@ -232,7 +232,7 @@
               ],
               "loadBalancerInboundNatRules": [
                 {
-                  "id": "[concat(variables('loadBalancerID'),'/inboundNatRules/tfs-rdp')]"
+                  "id": "[concat(variables('loadBalancerID'),'/inboundNatRules/devops-rdp')]"
                 }
               ],
               "subnet": {
