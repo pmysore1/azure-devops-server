@@ -142,7 +142,7 @@
       "type": "Microsoft.Network/loadBalancers",
       "location": "[parameters('location')]",
       "sku": {
-        "name": "Standard"
+        "name": "Basic"
       },
       "dependsOn": [
         "[concat('Microsoft.Compute/availabilitySets/',parameters('availabilitySetName'))]"
