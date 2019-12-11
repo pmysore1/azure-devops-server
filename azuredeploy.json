@@ -139,7 +139,9 @@
       "domainControllerTemplate": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/domainController.json', parameters('_artifactsLocationSasToken')))]",
       "sqlServerTemplate": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/sqlServerManaged.json', parameters('_artifactsLocationSasToken')))]",
       "tfsServerTemplate": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/tfs.json', parameters('_artifactsLocationSasToken')))]"
-    }
+    },
+    "nsgName": "[concat(parameters('appName'),'-','nsg')]",
+    "nsgTemplateUri": "https://raw.githubusercontent.com/pmysore1/create-ha-ad/master/nestedtemplates/nsg/nsg.json"
   },
   "resources": [
     {
@@ -191,7 +193,11 @@
       "name": "DevOpsServer",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-08-01",
-      "comments": "This creates the TFS VM",
+      "comments": "This creates the DevOps VM",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/',variables('nsgName'),'-resource')]"
+       ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -246,6 +252,9 @@
           },
           "logAnalyticsWorkspaceName": {
             "value": "[parameters('logAnalyticsWorkspaceName')]"
+          },
+          "nsgName": {
+            "value": "[variables('nsgName')]"
           }
         }
       }
@@ -255,6 +264,10 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-08-01",
       "comments": "This creates the DevOps search VM",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/',variables('nsgName'),'-resource')]"
+       ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -309,6 +322,34 @@
           },
           "logAnalyticsWorkspaceName": {
             "value": "[parameters('logAnalyticsWorkspaceName')]"
+          },
+          "nsgName": {
+            "value": "[variables('nsgName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2017-05-10",
+      "name": "[concat(variables('nsgName'),'-resource')]",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('nsgTemplateUri')]"
+        },
+        "parameters": {
+          "nsg_name": {
+            "value": "[variables('nsgName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          },
+          "external_ips": {
+              "value": "[parameters('external_ips')]"
           }
         }
       }

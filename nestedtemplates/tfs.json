@@ -107,6 +107,9 @@
     },
     "managementResourceGroupName": {
       "type": "string"
+    },
+    "nsgName": {
+      "type": "string"
     }
   },
   "variables": {
@@ -160,7 +163,7 @@
         ],
         "inboundNatRules": [
           {
-              "name": "tfs-rdp",
+              "name": "devops-rdp",
               "properties": {
                   "frontendIPConfiguration": {
                       "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')), '/frontendIpConfigurations/', variables('loadBalancerFrontendName'))]"
@@ -217,6 +220,9 @@
         "ipConfigurations": [
           {
             "name": "ipconfig1",
+            "networkSecurityGroup": {
+              "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('nsgName'))]"
+            },
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "loadBalancerBackendAddressPools": [
