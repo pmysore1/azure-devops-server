@@ -148,58 +148,10 @@
   },
   "resources": [
     {
-      "name": "Network",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2017-08-01",
-      "comments": "This creates the public IP address, virtual network and load balancer",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('nestedTemplates').networkTemplate]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "devOpsVnetName": {
-            "value": "[parameters('devOpsVnetName')]"
-          },
-          "managementVnetName": {
-            "value": "[parameters('managementVnetName')]"
-          },
-          "managementResourceGroupName": {
-            "value": "[parameters('managementResourceGroupName')]"
-          },
-          "devOpsVnetCIDR": {
-            "value": "[parameters('devOpsVnetCIDR')]"
-          },
-          "loadBalancerName": {
-            "value": "[variables('loadBalancerName')]"
-          },
-          "subnetName": {
-            "value": "[variables('subnetName')]"
-          },
-          "subnetCIDR": {
-            "value": "[parameters('appSubnetCIDR')]"
-          },
-          "loadBalancerBackendName": {
-            "value": "[variables('loadBalancerBackendName')]"
-          },
-          "availabilitySetName": {
-            "value": "[variables('availabilitySetName')]"
-          },
-          "dnsServers": {
-            "value": "[parameters('dnsServers')]"
-          }
-        }
-      }
-    },
-    {
       "name": "SQLServer",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-08-01",
       "comments": "This creates the SQL Server VM",
-      "dependsOn": [
-        "Microsoft.Resources/deployments/Network"
-      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {

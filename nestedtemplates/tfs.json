@@ -120,8 +120,9 @@
     "loadBalancerBackendName": "[concat(parameters('loadBalancerName'), '-backend')]",
     "loadBalancerFrontendName": "[concat(parameters('loadBalancerName'), '-frontend')]",
     "loadBalancerID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]",
-    "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('existingVnetName'), parameters('existingSubnetName'))]"
+    "subnetRef": "[resourceId(variables('managementResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingVnetName'), parameters('existingSubnetName'))]"
   },
+
   "resources": [
     {
       "type": "Microsoft.Compute/availabilitySets",

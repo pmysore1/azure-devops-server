@@ -163,7 +163,7 @@
             "[parameters('sqlserverName')]"
           ],
           "sku": {
-            "name": "S2",
+            "name": "S3",
             "tier": "Standard"
           },
           "properties": {
