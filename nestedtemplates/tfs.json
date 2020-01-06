@@ -114,9 +114,17 @@
     "tags": {
       "type": "object"
     },
+    "staticIp": {
+      "type": "String"
+    },
+    "lbStaticIp": {
+      "type": "String"
+    }
   },
   "variables": {
     "networkInterfaceName": "[concat(parameters('vmName'), '-nic')]",
+    "staticIp": "parameters('staticIp')",
+    "lbStaticIp": "parameters('StaticIp')",
     "loadBalancerBackendName": "[concat(parameters('loadBalancerName'), '-backend')]",
     "loadBalancerFrontendName": "[concat(parameters('loadBalancerName'), '-frontend')]",
     "loadBalancerID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]",
@@ -154,7 +162,8 @@
           {
             "name": "[variables('loadBalancerFrontendName')]",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('lbStaticIp')]",
               "subnet": {
                 "id": "[variables('subnetRef')]"
               }
@@ -226,7 +235,8 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('staticIp')]",
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName')), '/backendAddressPools/', variables('loadBalancerBackendName'))]"

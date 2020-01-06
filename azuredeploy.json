@@ -130,6 +130,18 @@
     },
     "external_ips": {
       "type": "string"
+    },
+    "devopsServerStaticIp": {
+      "type": "string"
+    },
+    "devopsServerSearchStaticIp": {
+      "type": "string"
+    },
+    "devopsServerLBStaticIp": {
+      "type": "string"
+    },
+    "devopsSearchLBStaticIp": {
+      "type": "string"
     }
   },
   "variables": {
@@ -141,7 +153,7 @@
       "networkTemplate": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/virtualNetwork.json', parameters('_artifactsLocationSasToken')))]",
       "domainControllerTemplate": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/domainController.json', parameters('_artifactsLocationSasToken')))]",
       "sqlServerTemplate": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/sqlServerManaged.json', parameters('_artifactsLocationSasToken')))]",
-      "tfsServerTemplate": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/tfs.json', parameters('_artifactsLocationSasToken')))]"
+      "devOpsServerTemplate": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/tfs.json', parameters('_artifactsLocationSasToken')))]"
     },
     "nsgName": "[concat(parameters('appName'),'-','nsg')]",
     "nsgTemplateUri": "https://raw.githubusercontent.com/pmysore1/create-ha-ad/master/nestedtemplates/nsg/nsg.json"
@@ -212,6 +224,9 @@
           },
           "tags": {
             "value": "[parameters('tags')]"
+          },
+          "devopsServerStaticIp": {
+            "type": "String"
           }
         }
       }
@@ -227,7 +242,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('nestedTemplates').tfsServerTemplate]",
+          "uri": "[variables('nestedTemplates').devOpsServerTemplate]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": { 
@@ -285,6 +300,12 @@
           "tags": {
             "value": "[parameters('tags')]"
           },
+          "staticIp": {
+            "value": "[parameters('devopsServerStaticIp')]"
+          },
+          "lbStaticIp": {
+            "value": "[parameters('devopsServerLBStaticIp')]"
+          }
         }
       }
     },
@@ -299,7 +320,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('nestedTemplates').tfsServerTemplate]",
+          "uri": "[variables('nestedTemplates').devOpsServerTemplate]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": { 
@@ -357,6 +378,12 @@
           "tags": {
             "value": "[parameters('tags')]"
           },
+          "staticIp": {
+            "value": "[parameters('devopsServerSearchStaticIp')]"
+          },
+          "lbStaticIp": {
+            "value": "[parameters('devopsSearchLBStaticIp')]"
+          }
         }
       }
     },
