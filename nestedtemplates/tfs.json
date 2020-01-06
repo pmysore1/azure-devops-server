@@ -115,10 +115,10 @@
       "type": "object"
     },
     "staticIp": {
-      "type": "String"
+      "type": "string"
     },
     "lbStaticIp": {
-      "type": "String"
+      "type": "string"
     }
   },
   "variables": {
